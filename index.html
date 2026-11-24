@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#FAF7F2">
+  <title>Dar El Djazair Kitchen · Order in Batna City</title>
+  <meta name="description" content="Chakhchoukha, mechoui and fresh bourek from Dar El Djazair Kitchen in Batna City. Dine in, take away, or order local delivery.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <a class="skip-link" href="#menu">Skip to menu</a>
+
+  <header class="site-header">
+    <div class="container header__inner">
+      <a class="brand" href="./index.html" aria-label="Dar El Djazair Kitchen home">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M8 26V14a8 8 0 0 1 16 0v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 26h22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M13 26v-7a3 3 0 0 1 6 0v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+          </svg>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">Dar El Djazair</span>
+          <span class="brand__sub">Kitchen, Batna</span>
+        </span>
+      </a>
+
+      <div class="header__actions">
+        <span class="status-pill">
+          <i data-lucide="clock" aria-hidden="true"></i>
+          <span class="status-pill__short">Open</span>
+          <span class="status-pill__full">Open today</span>
+          <span class="status-pill__place"> · Batna City</span>
+        </span>
+        <a class="admin-link" href="./admin.html">Admin</a>
+        <button class="tray-btn" id="openTrayBtn" type="button" aria-haspopup="dialog" aria-controls="trayDialog">
+          <i data-lucide="shopping-bag" aria-hidden="true"></i>
+          <span class="tray-btn__label">Order tray</span>
+          <span class="tray-btn__count" id="trayCount" hidden>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="intro container" aria-labelledby="introTitle">
+      <div class="intro__copy">
+        <p class="place-line"><i data-lucide="map-pin" aria-hidden="true"></i> Batna City, Algeria</p>
+        <h1 id="introTitle">Batna cooking, made for tonight.</h1>
+        <p class="intro__lead">Chakhchoukha, mechoui and fresh bourek, cooked to order in Batna City.</p>
+        <div class="intro__actions">
+          <a class="btn btn--primary" href="#menu">Browse the menu</a>
+          <a class="text-link" href="#track"><i data-lucide="receipt" aria-hidden="true"></i> Track an order</a>
+        </div>
+      </div>
+
+      <aside class="service-card" aria-labelledby="serviceTitle">
+        <div class="service-card__head">
+          <h2 id="serviceTitle">Today at the kitchen</h2>
+          <span class="service-card__hours">Open daily</span>
+        </div>
+        <dl class="service-list">
+          <div><dt>Kitchen hours</dt><dd class="mono">11:00 to 23:00</dd></div>
+          <div><dt>Local delivery</dt><dd class="mono"><span data-delivery-fee>200 DA</span></dd></div>
+          <div><dt>Pickup</dt><dd class="mono">15 to 25 min</dd></div>
+          <div><dt>Dine-in</dt><dd>Table service</dd></div>
+        </dl>
+        <p class="service-card__note">Delivery runs inside Batna City only.</p>
+      </aside>
+    </section>
+
+    <section class="track container" id="track" aria-labelledby="trackTitle">
+      <div class="track__bar">
+        <div class="track__intro">
+          <span class="track__icon" aria-hidden="true"><i data-lucide="receipt"></i></span>
+          <div>
+            <h2 id="trackTitle">Track my order</h2>
+            <p>Enter the code from your order ticket.</p>
+          </div>
+        </div>
+        <form class="track__form" id="trackForm" novalidate>
+          <label class="sr-only" for="trackCode">Order code</label>
+          <div class="track__field">
+            <input id="trackCode" name="code" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ORD-4821" maxlength="12" required>
+            <button class="btn btn--dark" type="submit" id="trackSubmit"><span>Track order</span></button>
+          </div>
+        </form>
+      </div>
+      <p class="track__error" id="trackError" role="alert" hidden></p>
+      <div class="track__result" id="trackResult" hidden></div>
+    </section>
+
+    <section class="menu container" id="menu" aria-labelledby="menuTitle">
+      <div class="menu__head">
+        <div>
+          <h2 id="menuTitle">The menu</h2>
+          <p>Cooked to order.</p>
+        </div>
+        <p class="menu__count" id="menuCount" aria-live="polite">Loading menu</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter menu by category">
+        <button class="filter is-active" type="button" data-category="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-category="traditional" aria-pressed="false">Traditional</button>
+        <button class="filter" type="button" data-category="grills" aria-pressed="false">Grills</button>
+        <button class="filter" type="button" data-category="fast" aria-pressed="false">Fast Food</button>
+        <button class="filter" type="button" data-category="drinks" aria-pressed="false">Drinks</button>
+      </div>
+
+      <div class="menu__grid" id="menuGrid">
+        <p class="menu__loading">Loading the menu…</p>
+      </div>
+      <noscript>
+        <p class="menu__loading">This menu needs JavaScript to load. Please enable it to browse dishes and place an order.</p>
+      </noscript>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="brand__mark brand__mark--footer" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M8 26V14a8 8 0 0 1 16 0v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 26h22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M13 26v-7a3 3 0 0 1 6 0v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+          </svg>
+        </span>
+        <div>
+          <p class="footer__name">Dar El Djazair Kitchen</p>
+          <p class="footer__place">Batna City, Algeria</p>
+        </div>
+      </div>
+
+      <dl class="footer__facts">
+        <div><dt>Kitchen hours</dt><dd>Daily, 11:00 to 23:00</dd></div>
+        <div><dt>Delivery</dt><dd>Batna City only, <span data-delivery-fee>200 DA</span></dd></div>
+      </dl>
+
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#menu">Menu</a>
+        <a href="#track">Track order</a>
+        <a href="./admin.html">Admin</a>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p>© 2026 Dar El Djazair Kitchen. Batna City, Algeria.</p>
+      <p>Cooked in Batna, delivered across the city.</p>
+    </div>
+  </footer>
+
+  <dialog class="tray" id="trayDialog" aria-labelledby="trayTitle">
+    <div class="tray__head">
+      <div>
+        <h2 id="trayTitle">Your order</h2>
+        <p id="trayMeta">0 items</p>
+      </div>
+      <button class="icon-btn" id="closeTrayBtn" type="button" aria-label="Close order tray">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="tray__body" id="trayBody">
+      <div class="tray__empty" id="trayEmpty">
+        <span class="tray__empty-icon" aria-hidden="true"><i data-lucide="shopping-bag"></i></span>
+        <h3>Your tray is empty.</h3>
+        <p>Add a dish from the menu and it will show up here.</p>
+        <button class="btn btn--ghost" type="button" data-browse-menu>Browse the menu</button>
+      </div>
+
+      <div id="trayContent" hidden>
+        <div class="cart" id="cartList"></div>
+
+        <div class="cart-summary">
+          <div class="summary-row"><span>Subtotal</span><span id="sumSubtotal">0 DA</span></div>
+          <div class="summary-row" id="sumDeliveryRow" hidden><span>Delivery, Batna City</span><span id="sumDelivery">200 DA</span></div>
+          <div class="summary-row summary-row--total"><span>Total</span><span id="sumTotal">0 DA</span></div>
+        </div>
+
+        <form class="checkout" id="checkoutForm" novalidate>
+          <h3>Checkout</h3>
+
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="fullName" type="text" autocomplete="name" aria-describedby="fullNameError" placeholder="Amine Belkacem" required>
+            <p class="field__error" id="fullNameError" role="alert" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="phoneHint phoneError" placeholder="0550 12 34 56" maxlength="20" required>
+            <p class="field__hint" id="phoneHint">10 digits, starting with 05, 06 or 07.</p>
+            <p class="field__error" id="phoneError" role="alert" hidden></p>
+          </div>
+
+          <fieldset class="order-type">
+            <legend>Order type</legend>
+            <div class="order-type__options">
+              <label class="type-option">
+                <input type="radio" name="orderType" value="takeaway" checked>
+                <span class="type-option__body">
+                  <i data-lucide="shopping-bag" aria-hidden="true"></i>
+                  <span>Takeaway</span>
+                  <small>à emporter</small>
+                </span>
+              </label>
+              <label class="type-option">
+                <input type="radio" name="orderType" value="dine-in">
+                <span class="type-option__body">
+                  <i data-lucide="utensils" aria-hidden="true"></i>
+                  <span>Dine-in</span>
+                  <small>at our table</small>
+                </span>
+              </label>
+              <label class="type-option">
+                <input type="radio" name="orderType" value="delivery">
+                <span class="type-option__body">
+                  <i data-lucide="bike" aria-hidden="true"></i>
+                  <span>Delivery</span>
+                  <small>Batna only</small>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="conditional" data-for="dine-in" hidden>
+            <div class="field">
+              <label for="tableNumber">Table number</label>
+              <input id="tableNumber" name="tableNumber" type="text" inputmode="numeric" autocomplete="off" aria-describedby="tableNumberError" placeholder="Table 4">
+              <p class="field__hint">Ask a server if you are not sure.</p>
+              <p class="field__error" id="tableNumberError" role="alert" hidden></p>
+            </div>
+          </div>
+
+          <div class="conditional" data-for="takeaway">
+            <fieldset class="preference">
+              <legend>Pickup preference</legend>
+              <div class="segmented">
+                <label><input type="radio" name="pickup" value="asap" checked><span>ASAP</span></label>
+                <label><input type="radio" name="pickup" value="in-20-min"><span>In 20 min</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="conditional" data-for="delivery" hidden>
+            <div class="field">
+              <label for="address">Batna delivery address</label>
+              <input id="address" name="address" type="text" list="batnaAreas" autocomplete="street-address" aria-describedby="addressError" placeholder="Kechida, Rue des Frères, bâtiment 4">
+              <p class="field__hint">Batna City only. Flat <span data-delivery-fee>200 DA</span> added at checkout.</p>
+              <p class="field__error" id="addressError" role="alert" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes <span class="field__optional">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="2" placeholder="No onions, extra harissa, call on arrival…"></textarea>
+          </div>
+
+          <p class="form-error" id="checkoutError" role="alert" hidden></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="tray__foot" id="trayFoot" hidden>
+      <div class="tray__total">
+        <span>Total</span>
+        <strong id="trayTotal">0 DA</strong>
+      </div>
+      <p class="tray__foot-note" id="trayFeeNote" hidden></p>
+      <button class="btn btn--accent btn--block" type="submit" form="checkoutForm" id="placeOrderBtn">Place order</button>
+    </div>
+  </dialog>
+
+  <dialog class="ticket" id="ticketDialog" aria-label="Order confirmation">
+    <div id="ticketContent"></div>
+  </dialog>
+
+  <datalist id="batnaAreas">
+    <option value="Kechida"></option>
+    <option value="Centre-Ville"></option>
+    <option value="Cité 1200 Logements"></option>
+    <option value="Bouzourane"></option>
+    <option value="Parc à Fourrage"></option>
+    <option value="Les Allées"></option>
+    <option value="Cité Ben Boulaïd"></option>
+  </datalist>
+
+  <div class="sr-only" id="liveRegion" aria-live="polite"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
